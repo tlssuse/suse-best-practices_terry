@@ -9,13 +9,13 @@
  xml:id="art-sbp-csp-update-infra" xml:lang="en">
 
  <info>
-  <title>SUSE Update Infrastructure</title>
-  <subtitle>Setup Guide for Cloud Service Providers</subtitle>
+  <title>SUSE Linux Enterprise Update Infrastructure</title>
+  <subtitle>Setup Guide for Managed Service Providers</subtitle>
   
   <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
    <dm:bugtracker>
     <dm:url>https://github.com/SUSE/suse-best-practices/issues/new</dm:url>
-    <dm:product>SUSE Update Infrastructure - Setup Guide for Cloud Service Providers</dm:product>
+    <dm:product>SUSE Linux Enterprise Update Infrastructure - Setup Guide for Managed Service Providers</dm:product>
    </dm:bugtracker>
    <dm:editurl>https://github.com/SUSE/suse-best-practices/edit/main/xml/</dm:editurl>
   </dm:docmanager>
@@ -30,10 +30,10 @@
    <phrase>Installation</phrase>
    <phrase>Subscription Management</phrase>
   </meta>
-  <meta name="title" its:translate="yes">SUSE Update Infrastructure</meta>
+  <meta name="title" its:translate="yes">SUSE Linux Enterprise Update Infrastructure</meta>
   <meta name="description" its:translate="yes">Describes the setup of the recommended infrastructure for providing SUSE
   Linux Enterprise Server as on-demand offerings in a cloud environment</meta>
-  <meta name="social-descr" its:translate="yes">Setup guide for cloud service providers</meta>  
+  <meta name="social-descr" its:translate="yes">Setup guide for managed service providers</meta>  
   <meta name="productname" its:translate="no">
    <productname version="15 SP3">SUSE Linux Enterprise Server</productname>
    <productname version="15 SP4">SUSE Linux Enterprise</productname>
@@ -63,6 +63,26 @@
      <orgname>SUSE</orgname>
     </affiliation>
    </author>
+   <author>
+    <personname>
+     <firstname>Gopala</firstname>
+     <surname>Krishnan A</surname>
+    </personname>
+    <affiliation>
+     <jobtitle>Solution Architect</jobtitle>
+     <orgname>SUSE</orgname>
+    </affiliation>
+   </author>
+   <author>
+    <personname>
+     <firstname>Terry</firstname>
+     <surname>Smith</surname>
+    </personname>
+    <affiliation>
+     <jobtitle>Partner Solutions Director</jobtitle>
+     <orgname>SUSE</orgname>
+    </affiliation>
+   </author>
    <!--   <editor>
    <orgname></orgname>
    </editor>
@@ -85,6 +105,12 @@
 
  <revhistory xml:id="rh-art-sbp-csp-update-infra">
    <revision>
+     <date>2025-04-01</date>
+      <revdescription>
+       <para>Updated versions and partner designation</para>
+      </revdescription>
+    </revision>
+   <revision>
      <date>2024-06-12</date>
       <revdescription>
        <para>Updated environment</para>
@@ -103,7 +129,7 @@
    <para> This guide describes the setup of the recommended infrastructure for offering &sls;
     and &slssap; as on-demand offerings in a cloud environment. The update infrastructure scales
     from small to large cloud installations. The guide is an optional, but highly recommended
-    element of a Cloud Service Provider's (CSP's) infrastructure. It allows for central license and
+    element of the infrastructure of a Managed Service Provider (MSP). It allows for central license and
     repository management. </para>
 
    <para>
@@ -145,8 +171,8 @@
    agnostic and as such can be implemented for any framework implementation. This does not imply
    that the system must be set up in the described way. However, if components are modified or
    alternative architectures are used, then the components provided by &suse; will no longer
-   function in a "plug and play" fashion. It is up to the CSP to implement the necessary components
-   to fit the architectural changes being made. </para>
+   function in a "plug and play" fashion. It is up to the MSP to implement the necessary components
+   to fit the architectural changes being made.</para>
  </sect1>
  <sect1 xml:id="sec-overview">
   <title>High level overview</title>
@@ -187,8 +213,8 @@
 
    <para> The function of the Region Server is to provide information about the RMT servers in a
     given region to the connecting guest. </para>
-   <para> For CSP&#8217;s operating in various geographical locations, the Region Servers
-    provide instances information on the RMT server to use for that location. If the CSP has only
+   <para> For MSPs operating in various geographical locations, the Region Servers
+    provide instances information on the RMT server to use for that location. If the MSP has only
     one region, it is still appropriate to use the Region Server to allow for an easier future
     expansion. </para>
 
@@ -199,7 +225,7 @@
      <emphasis role="strong">NOT</emphasis> to deploy a Region Server. This enables automatic
      registration, giving end customers a <quote>launch and use</quote> experience, without the need
      to manually enter or select a registration server. </para>
-    <para> If a cloud provider chooses not to deploy the Region Server it is not possible to use the
+    <para> If you choose not to deploy the Region Server, it is not possible to use the
      &suse; provided client tools, <link
       xlink:href="https://github.com/SUSE-Enceladus/cloud-regionsrv-client"
       >cloud-regionssrv-client</link>. The &suse; client tool includes a <link
@@ -251,8 +277,8 @@
   <title>Detailed setup guide</title>
 
   <para> Although the Region Server is the first service used by a client, its setup and
-   configuration is dependent on the setup of the RMT servers. Therefore, the setup guide will
-   describe the setup in reverse order as compared to the previous section. </para>
+   configuration is dependent on the setup of the RMT servers. Therefore, the setup guide 
+   describes the setup in reverse order as compared to the previous section. </para>
 
   <sect2 xml:id="sec-prerequisite">
    <title>Prerequisites</title>
@@ -835,13 +861,13 @@ sudo chown -R _rmt:nginx /var/lib/rmt/public/repo
  </sect1>
 
  <sect1 xml:id="sec-rmt-registration-sharing-for-csp">
-  <title>Setting up RMT registration sharing for Cloud Service Providers</title>
+  <title>Setting up RMT registration sharing for Managed Service Providers</title>
 
   <sect2 xml:id="sec-intro-rmt-reg-sharing">
    <title>Introduction</title>
 
    <para> Registration sharing replicates client registrations across independent servers. This
-    enables Cloud Service Providers (CSPs) to provide redundant RMT servers per region so registered
+    enables Managed Service Providers (MSPs) to provide redundant RMT servers per region so registered
     instances will continue to have access to valid repositories in case of an RMT failure in the
     region. </para>
    <para> For registration sharing you will need to ensure the following: </para>
@@ -937,8 +963,8 @@ class InstanceVerification::Providers::Example &lt; InstanceVerification::Provid
  
      <para> In addition to the custom verification module described above, the
        <package>rmt-server-pubcloud</package> package implements generic instance verification
-      applicable to CSPs deployments. Product upgrade from SUSE Linux Enterprise Server to SUSE
-      Linux Enterprise Server for SAP Applications, for example, is not supported in a CSP
+      applicable to MSP deployments. Product upgrade from SUSE Linux Enterprise Server to SUSE
+      Linux Enterprise Server for SAP Applications, for example, is not supported in a MSP
       framework. This is enforced as part of the default verification. For additional details, you
       may reference the implementation maintained in <link
        xlink:href="https://github.com/SUSE/rmt/tree/master/engines/instance_verification"/> GitHub.
@@ -1031,7 +1057,7 @@ systemctl enable rmt-server-regsharing.timer
     given region to a connecting client. The Region Server runs as a Python script using the Flask
     framework in Apache. The Region Server is provided with the <package>cloud-regionsrv</package>
     package. </para>
-   <para> Region servers are located in a CSP network. An example of the Region Server placement
+   <para> Region servers are located in a MSP network. An example of the Region Server placement
     could be based on geographic boundaries like Americas, Europe/Middle East and Asia. It is
     recommended that a minimum of three Region Servers are deployed for redundancy. Install,
     register and fully patch SUSE Linux Enterprise Server 15 SP3 or later for each of the region
